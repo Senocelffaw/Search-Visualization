@@ -11,6 +11,11 @@ import Queue from './Queue.js'
 var mousedown = false;
 var disableMouse = false;
 
+var pathfindingAlgorithm = 0;
+
+var moveStart = false;
+var moveEnd = false;
+
 var wall = 'wall'; //wall class
 var traversed = 'traversed'; //path class
 var start = 'start';    //start class
@@ -296,6 +301,8 @@ function visualizePath(list){
     }
 }
 
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////           Grid Editing                    /////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -337,12 +344,26 @@ document.getElementById('visualize').addEventListener('click', function(){
     clearTraversed();
     document.getElementById('clear').disabled = true;
     disableMouse = true;
+
     var rows = findRows();
     var cols = findColumns();
-    grid = createNodeGrid(rows, cols);
+
+    var grid = createNodeGrid(rows, cols);
+    var list;
     updateWalls(grid);
-    var list = breadthFirstSearch(grid);
-    slowVisualization(list);
+
+    if(pathfindingAlgorithm == 1){
+        list = breadthFirstSearch(grid);
+        slowVisualization(list);
+    }
+    else if(pathfindingAlgorithm == 2){
+        list = breadthFirstSearch(grid);
+        visualizePathfinding(list);
+    }
+    else{
+        disableMouse = false;
+        document.getElementById('clear').disabled = false;
+    }
 }, false);
 
 //  Add wall to the TD element
@@ -353,6 +374,11 @@ document.addEventListener('mousedown', function(e){
             e.target.classList.add(wall);
         }
     }
+
+    if(e.target.classList.contains('start')){
+        
+    }
+
 }, false);
 
 //  Do not draw after mouseup
@@ -372,6 +398,11 @@ document.addEventListener('mouseover', function(e){
 document.getElementById('clear').onclick = function(){
     clearGrid();
 }
+
+document.getElementById('breadthfirstsearch').addEventListener('click', function(){
+    pathfindingAlgorithm = 1;
+    document.getElementById('dropdownMenu2').innerHTML = "Breadth First Search";
+}, false);
 
 
 

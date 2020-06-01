@@ -10,6 +10,15 @@
 <body>
     <nav id="nav" class="navbar bg-dark">
         <div class="container justify-content-center">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown">
+                    Algorithm
+                  </button>
+                <div class = "dropdown-menu">
+                    <button id = "breadthfirstsearch" class = "dropdown-item" type="button">Breadth First Search</button>
+                    <button class = "dropdown-item" type="button">Next Search algorithm</button>
+                </div>
+            </div>
             <button type="button" class="btn btn-primary" id="visualize">Visualize</button>
             <button type="button" class="btn btn-warning" id="clear">Clear Board</button>
         </div>
@@ -21,6 +30,9 @@
     <div id="grid" class="row justify-content-center m-0">
 
     </div>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
     <script type="module" src="../js/app.js"></script>
 </body>
 </html>
