@@ -1,0 +1,37 @@
+#grid .grid tbody tr td {
+  padding: 19.5px;
+}
+
+button {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.traversed {
+  background-color: #5bdeff;
+}
+
+.shortest {
+  background-color: coral;
+}
+
+.wall {
+  background-color: black;
+}
+
+.start {
+  background-color: green;
+}
+
+.end {
+  background-color: red;
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/*# sourceMappingURL=scss.css.map */
