@@ -427,11 +427,17 @@ document.getElementById('breadthfirstsearch').addEventListener('click', function
     document.getElementById('dropdownMenu2').innerHTML = "Breadth First Search";
 }, false);
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////           Draggable start/end             /////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function checkIfMoveStart(target){
     if(moveStart){
         target.classList.add('start');
         moveStart = false;
         disableMouse = false;
+        target.classList.remove(wall);
     }
 }
 
@@ -442,10 +448,13 @@ function deleteStartIfMoved(target){
 }
 
 function checkIfMoveEnd(target){
-    if(moveEnd){
+    
+    if(moveEnd && target.nodeName == 'TD'){
         target.classList.add('end');
         moveEnd = false;
         disableMouse = false;
+        target.classList.remove(wall);
+
     }
 }
 
