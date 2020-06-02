@@ -141,6 +141,15 @@ function updateWalls(grid){
             if(table.rows[i].cells[j].classList.contains(wall)){
                 grid[i][j].traversed = 1;
             }
+            else if(table.rows[i].cells[j].classList.contains(start)){
+                grid[i][j].traversed = 3;
+            }
+            else if(table.rows[i].cells[j].classList.contains(end)){
+                grid[i][j].traversed = 4;
+            }
+            else{
+                grid[i][j].traversed = 0;
+            }
         }
     }
 }
@@ -352,6 +361,7 @@ document.getElementById('visualize').addEventListener('click', function(){
     var list;
     updateWalls(grid);
 
+
     if(pathfindingAlgorithm == 1){
         list = breadthFirstSearch(grid);
         slowVisualization(list);
@@ -369,21 +379,34 @@ document.getElementById('visualize').addEventListener('click', function(){
 //  Add wall to the TD element
 document.addEventListener('mousedown', function(e){
     mousedown = true;
+
+    if(e.target.classList.contains('start')){
+        moveStart = true;
+        disableMouse = true;
+    }
+    else if(e.target.classList.contains('end')){
+        moveEnd = true;
+        disableMouse= true;
+    }
+
+    deleteStartIfMoved(e.target);
+    deleteEndIfMoved(e.target);
+
+
     if(e.target.tagName == "TD" && mousedown && !disableMouse){
         if(!e.target.classList.contains('start') && !e.target.classList.contains('end')){
             e.target.classList.add(wall);
         }
     }
 
-    if(e.target.classList.contains('start')){
-        
-    }
-
 }, false);
+
 
 //  Do not draw after mouseup
 document.addEventListener('mouseup', function(e){
     mousedown = false;
+    checkIfMoveStart(e.target);
+    checkIfMoveEnd(e.target);
 }, false);
 
 // If mouse is down and over element, add wall to the td element
@@ -404,7 +427,33 @@ document.getElementById('breadthfirstsearch').addEventListener('click', function
     document.getElementById('dropdownMenu2').innerHTML = "Breadth First Search";
 }, false);
 
+function checkIfMoveStart(target){
+    if(moveStart){
+        target.classList.add('start');
+        moveStart = false;
+        disableMouse = false;
+    }
+}
 
+function deleteStartIfMoved(target){
+    if(moveStart){
+        target.classList.remove('start');
+    }
+}
+
+function checkIfMoveEnd(target){
+    if(moveEnd){
+        target.classList.add('end');
+        moveEnd = false;
+        disableMouse = false;
+    }
+}
+
+function deleteEndIfMoved(target){
+    if(moveEnd){
+        target.classList.remove('end');
+    }
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////             MAIN FUNCTION           /////////////////////////////////////////
